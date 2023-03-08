@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text } from 'react-native';
 import { TextInput } from "@react-native-material/core";
 import { Button } from "@react-native-material/core";
@@ -6,30 +6,31 @@ import { realtimeDbConfig } from '../firebase/realtimeDbConfig'
 import { firestoreDB } from '../firebase/firestoreConfig';
 import { ref, set } from "firebase/database";
 import { collection, doc, addDoc, getDocs, deleteDoc } from "firebase/firestore";
+import Product from './Product';
 const AddProduct = () => {
     const [productName, setProductName] = React.useState('');
-    const [users, setUsers] = useState([]);
+    const [products, setproducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const getAlldata = () => {
-        getDocs(collection(firestoreDB, "users")).then(docSnap => {
-            let users = [];
+        getDocs(collection(firestoreDB, "products")).then(docSnap => {
+            let products = [];
             docSnap.forEach((doc) => {
-                users.push({ ...doc.data(), id: doc.id })
+                products.push({ ...doc.data(), id: doc.id })
             });
-            setUsers(users);
+            setproducts(products);
             setLoading(false);
         });
     }
-    const deleteData = (id) => {
-        deleteDoc(doc(firestoreDB, "users", id))
+    const deleteData = useCallback((id) => {
+        deleteDoc(doc(firestoreDB, "products", id))
         getAlldata();
-    }
+    },[])
     useEffect(() => {
         getAlldata();
     }, []);
     const addProductToFireStore = () => {
-        addDoc(collection(firestoreDB, "users"), {
-            username: productName
+        addDoc(collection(firestoreDB, "products"), {
+            product_name: productName
         }).then(() => {
             getAlldata();
             setProductName('');
@@ -38,8 +39,8 @@ const AddProduct = () => {
         });
     }
     const addProducttoFireBaseRealTimeDB = () => {
-        set(ref(realtimeDbConfig, 'users/'), {
-            username: productName
+        set(ref(realtimeDbConfig, 'products/'), {
+            product_name: productName
         }).then(() => {
             alert('data updated');
         }).catch((error) => {
@@ -52,7 +53,6 @@ const AddProduct = () => {
     return (
         <SafeAreaView>
             <View>
-
                 <TextInput label="Enter Data" style={{ margin: 16 }} onChangeText={setProductName}
                     value={productName} />
             </View>
@@ -62,20 +62,9 @@ const AddProduct = () => {
             </View>
             <FlatList
                 style={{ paddingBottom: 20, marginLeft: 5 }}
-                data={users}
-                renderItem={({ item }) => (
-                    <View style={{ flexDirection: 'row', padding: 5, borderBottomColor: 'gray', borderBottomWidth: 0.5 }}>
-                        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
-                            <Text>{item.username}</Text>
-                        </View>
-                        <View style={{ alignItems: 'flex-end', justifyContent: 'center' }}>
-                            <Button
-                                variant="outlined"
-                                title="Delete"
-                                onPress={() => deleteData(item.id)}
-                            />
-                        </View>
-                    </View>
+                data={products}
+                renderItem={({ item }) => (                
+                    <Product deleteData={deleteData} item={item}/>
                 )}
             />
         </SafeAreaView>
