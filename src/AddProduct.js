@@ -1,48 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, FlatList, SafeAreaView, StyleSheet, TextInput, Text } from 'react-native';
+import { View, ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text } from 'react-native';
+import { TextInput } from "@react-native-material/core";
 import { Button } from "@react-native-material/core";
 import { realtimeDbConfig } from '../firebase/realtimeDbConfig'
 import { firestoreDB } from '../firebase/firestoreConfig';
-import { query, ref, set } from "firebase/database";
-import { collection, doc, setDoc, addDocs, addDoc } from "firebase/firestore";
-import firestore from '@react-native-firebase/firestore';
-
+import { ref, set } from "firebase/database";
+import { collection, doc, addDoc, getDocs, deleteDoc } from "firebase/firestore";
 const AddProduct = () => {
-    const [text, onChangeText] = React.useState('');
+    const [productName, setProductName] = React.useState('');
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const subscriber = firestore()
-            .collection('users')
-            .onSnapshot(querySnapshot => {
-                const users = [];
-
-                querySnapshot.forEach(documentSnapshot => {
-                    users.push({
-                        ...documentSnapshot.data(),
-                        key: documentSnapshot.id,
-                    });
-                });
-                console.log(users);
-                setUsers(users);
-                setLoading(false);
+    const getAlldata = () => {
+        getDocs(collection(firestoreDB, "users")).then(docSnap => {
+            let users = [];
+            docSnap.forEach((doc) => {
+                users.push({ ...doc.data(), id: doc.id })
             });
-
-        // Unsubscribe from events when no longer in use
-        return () => subscriber();
+            setUsers(users);
+            setLoading(false);
+        });
+    }
+    const deleteData = (id) => {
+        deleteDoc(doc(firestoreDB, "users", id))
+        getAlldata();
+    }
+    useEffect(() => {
+        getAlldata();
     }, []);
     const addProductToFireStore = () => {
         addDoc(collection(firestoreDB, "users"), {
-            username: text
+            username: productName
         }).then(() => {
-            console.log('data submitted');
+            getAlldata();
+            setProductName('');
         }).catch((error) => {
             console.log(error);
         });
     }
     const addProducttoFireBaseRealTimeDB = () => {
         set(ref(realtimeDbConfig, 'users/'), {
-            username: text
+            username: productName
         }).then(() => {
             alert('data updated');
         }).catch((error) => {
@@ -51,21 +48,33 @@ const AddProduct = () => {
     }
     if (loading) {
         return <ActivityIndicator />;
-      }
+    }
     return (
         <SafeAreaView>
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
-            />
-            <Button variant="outlined" title="AddFireStore"
-                onPress={() => addProductToFireStore()} />
+            <View>
+
+                <TextInput label="Enter Data" style={{ margin: 16 }} onChangeText={setProductName}
+                    value={productName} />
+            </View>
+            <View style={{ alignItems: 'center' }} >
+                <Button  title="Add"
+                    onPress={() => addProductToFireStore()} />
+            </View>
             <FlatList
+                style={{ paddingBottom: 20, marginLeft: 5 }}
                 data={users}
                 renderItem={({ item }) => (
-                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text>User Name: {item.username}</Text>
+                    <View style={{ flexDirection: 'row', padding: 5, borderBottomColor: 'gray', borderBottomWidth: 0.5 }}>
+                        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
+                            <Text>{item.username}</Text>
+                        </View>
+                        <View style={{ alignItems: 'flex-end', justifyContent: 'center' }}>
+                            <Button
+                                variant="outlined"
+                                title="Delete"
+                                onPress={() => deleteData(item.id)}
+                            />
+                        </View>
                     </View>
                 )}
             />
@@ -75,10 +84,7 @@ const AddProduct = () => {
 
 const styles = StyleSheet.create({
     input: {
-        height: 40,
-        margin: 12,
         borderWidth: 1,
-        padding: 10,
     },
 });
 
