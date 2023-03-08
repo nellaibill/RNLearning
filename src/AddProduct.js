@@ -1,13 +1,25 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView, StyleSheet, TextInput, Text } from 'react-native';
 import { Button } from "@react-native-material/core";
-import { database } from '../firebase/realtimeDbConfig'
-import { ref, set } from "firebase/database";
+import { realtimeDbConfig } from '../firebase/realtimeDbConfig'
+import { firestoreDB } from '../firebase/firestoreConfig';
+import { query, ref, set } from "firebase/database";
+import { collection, doc, setDoc, addDocs, addDoc } from "firebase/firestore";
+
 const AddProduct = () => {
     const [text, onChangeText] = React.useState('');
-   
+
+    const addProductToFireStore = () => {
+        addDoc(collection(firestoreDB, "users"), {
+            username: text
+        }).then(() => {
+            console.log('data submitted');
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     const addProducttoFireBaseRealTimeDB = () => {
-        set(ref(database, 'users/'), {
+        set(ref(realtimeDbConfig, 'users/'), {
             username: text
         }).then(() => {
             alert('data updated');
@@ -22,8 +34,8 @@ const AddProduct = () => {
                 onChangeText={onChangeText}
                 value={text}
             />
-            <Button variant="outlined" title="Add"
-                onPress={() => addProducttoFireBaseRealTimeDB()} />
+            <Button variant="outlined" title="AddFireStore"
+                onPress={() => addProductToFireStore()} />
         </SafeAreaView>
     );
 };
