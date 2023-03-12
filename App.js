@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddProduct from './src/AddProduct';
+import { useEffect } from 'react';
+import { NotificationServices, requestUserPermission } from './src/utils/pushnotification';
 const Stack = createStackNavigator();
 function MyStack() {
   return (
@@ -15,6 +17,10 @@ function MyStack() {
   );
 }
 const App = () => {
+  useEffect(() => {
+    requestUserPermission();
+    NotificationServices();
+  }, [])
   return (
     <NavigationContainer>
       <MyStack />

@@ -10,14 +10,7 @@ const HomeScreen = ({ navigation }) => {
         <Button
           title="AddProduct"
           onPress={() => navigation.navigate('AddProduct')}
-          style={{ alignSelf: "center", marginTop: 40 }}
-        />
-      </View>
-      <View>
-        <Button
-          title="Go to Products"
-          onPress={() => navigation.navigate('Products')}
-          style={{ alignSelf: "center", marginTop: 40 }}
+          style={{ alignSelf: "center", marginTop: 20 }}
         />
       </View>
     </>
