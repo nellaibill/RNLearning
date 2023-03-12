@@ -1,33 +1,45 @@
-import { View, Text } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react';
-
-const Login = () => {
+import { useDispatch } from 'react-redux'
+import { login } from './src/features/user'
+const Login = ({ navigation }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [count, setCount] = useState(0);
-
-    const multipliedValue = count * 2;
-    const handleIncrement = () => {
-        console.log("Triggered");
-        setCount((c) => c + 1);
+    const dispatch = useDispatch();
+    const handleLogin = () => {
+        dispatch(login({ username: username }));
+        navigation.navigate('UserProfile')
     }
-    const [cart, setCart] = useState(0);
     return (
-        <View>
-            <TextInput
-                style={styles.input}
-                value={username}
-                onChangeText={setUsername}
-            />
-            <TextInput
-                style={styles.input}
-                value={password}
-                onChangeText={setPassword}
-            />
-
-            <Button title="Login" onPress={handleIncrement}> </Button>
+        <View style={{ padding: 10 }}>
+            <View >
+                <Text >
+                    Username
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setUsername}
+                    value={username}
+                />
+                <Text >
+                    Password
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setPassword}
+                    value={password}
+                />
+                <Button title="Login"
+                    onPress={() => handleLogin()}> </Button>
+            </View >
         </View>
     )
 }
-
+const styles = StyleSheet.create({
+    input: {
+        height: 40,
+        borderWidth: 1,
+        marginBottom: 10
+    },
+});
 export default Login
