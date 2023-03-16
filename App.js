@@ -8,23 +8,26 @@ import { useEffect } from 'react';
 import { NotificationServices, requestUserPermission } from './src/utils/pushnotification';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import  userReducer  from './src/features/user'
+import userReducer from './src/features/user'
 import Login from './Login';
 import UserProfile from './src/UserProfile';
-const store = configureStore({
-  reducer: {
-    user: userReducer
-  }
-})
+import MovieScreen from './src/screens/MovieScreen';
+import store from './store';
+// const store = configureStore({
+//   reducer: {
+//     user: userReducer
+//   }
+// })
 const Stack = createStackNavigator();
 function MyStack() {
   return (
-    <Stack.Navigator initialRouteName='Login'>
+    <Stack.Navigator initialRouteName='HomeScreen'>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Products" component={ProductList} />
       <Stack.Screen name="AddProduct" component={AddProduct} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
+      <Stack.Screen name="MovieScreen" component={MovieScreen} />
     </Stack.Navigator>
   );
 }

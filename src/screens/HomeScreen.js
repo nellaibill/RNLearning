@@ -6,13 +6,24 @@ import React from 'react'
 const HomeScreen = ({ navigation }) => {
   return (
     <>
-      <View>
+      <View style={{ marginLeft: 10, marginRight: 10 }}>
         <Button
-          title="AddProduct"
+          title="ActionItems -Firebase DB"
           onPress={() => navigation.navigate('AddProduct')}
-          style={{ alignSelf: "center", marginTop: 20 }}
+          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+        />
+        <Button
+          title="RTK-Saga -Movie DB"
+          onPress={() => navigation.navigate('MovieScreen')}
+          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+        />
+        <Button
+          title="Login-Profile"
+          onPress={() => navigation.navigate('Login')}
+          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
         />
       </View>
+
     </>
   )
 }
