@@ -13,6 +13,8 @@ import Login from './Login';
 import UserProfile from './src/UserProfile';
 import MovieScreen from './src/screens/MovieScreen';
 import store from './store';
+import MovieDetails from './src/screens/MovieDetails';
+import MovieList from './src/screens/MovieList';
 // const store = configureStore({
 //   reducer: {
 //     user: userReducer
@@ -28,6 +30,9 @@ function MyStack() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="MovieScreen" component={MovieScreen} />
+      <Stack.Screen name="MovieList" component={MovieList} />
+      <Stack.Screen name="MovieDetails" component={MovieDetails}  />
+
     </Stack.Navigator>
   );
 }
