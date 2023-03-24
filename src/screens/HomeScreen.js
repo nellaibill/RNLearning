@@ -22,6 +22,11 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('Login')}
           style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
         />
+        <Button
+          title="Product"
+          onPress={() => navigation.navigate('ProductList')}
+          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+        />
       </View>
 
     </>

@@ -25,7 +25,7 @@ function MyStack() {
   return (
     <Stack.Navigator initialRouteName='HomeScreen'>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Products" component={ProductList} />
+      <Stack.Screen name="ProductList" component={ProductList} />
       <Stack.Screen name="AddProduct" component={AddProduct} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
