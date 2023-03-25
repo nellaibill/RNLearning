@@ -9,3 +9,8 @@ export const fetchMovies = async (moviename) => {
 export const fetchMovie = async (movieId) => {
     return axios.get(`${APIENDPOINT}&i=${movieId}`);
 }
+const quoteApi = "https://api.quotable.io/random";
+
+export const fetchQuotes = async () => {
+    return axios.get(`${quoteApi}`);
+}

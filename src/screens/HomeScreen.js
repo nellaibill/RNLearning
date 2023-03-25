@@ -18,12 +18,17 @@ const HomeScreen = ({ navigation }) => {
           style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
         />
         <Button
+          title="Redux-Saga-Polling"
+          onPress={() => navigation.navigate('QuotesScreen')}
+          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+        />
+        <Button
           title="Login-Profile"
           onPress={() => navigation.navigate('Login')}
           style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
         />
         <Button
-          title="Product"
+          title="Memo-Callback-Transition"
           onPress={() => navigation.navigate('ProductList')}
           style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
         />

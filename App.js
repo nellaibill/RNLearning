@@ -15,6 +15,7 @@ import MovieScreen from './src/screens/MovieScreen';
 import store from './store';
 import MovieDetails from './src/screens/MovieDetails';
 import MovieList from './src/screens/MovieList';
+import QuotesScreen from './src/screens/QuotesScreen';
 // const store = configureStore({
 //   reducer: {
 //     user: userReducer
@@ -32,6 +33,7 @@ function MyStack() {
       <Stack.Screen name="MovieScreen" component={MovieScreen} />
       <Stack.Screen name="MovieList" component={MovieList} />
       <Stack.Screen name="MovieDetails" component={MovieDetails}  />
+      <Stack.Screen name="QuotesScreen" component={QuotesScreen}  />
 
     </Stack.Navigator>
   );
