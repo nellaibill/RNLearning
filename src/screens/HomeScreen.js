@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Button } from "@react-native-material/core";
 
 import React from 'react'
@@ -6,36 +6,44 @@ import React from 'react'
 const HomeScreen = ({ navigation }) => {
   return (
     <>
-      <View style={{ marginLeft: 10, marginRight: 10 }}>
+      <View style={{ marginLeft: 20, marginRight: 20 }}>
         <Button
-          title="ActionItems -Firebase DB"
-          onPress={() => navigation.navigate('AddProduct')}
-          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+          title="Redux-Saga-Polling"
+          onPress={() => navigation.navigate('QuotesScreen')}
+          style={styles.btnStyle}
         />
         <Button
           title="RTK-Saga -Movie DB"
           onPress={() => navigation.navigate('MovieScreen')}
-          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+          style={styles.btnStyle}
         />
         <Button
-          title="Redux-Saga-Polling"
-          onPress={() => navigation.navigate('QuotesScreen')}
-          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
-        />
-        <Button
-          title="Login-Profile"
-          onPress={() => navigation.navigate('Login')}
-          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+          title="ActionItems -Firebase DB"
+          onPress={() => navigation.navigate('AddTask')}
+          style={styles.btnStyle}
         />
         <Button
           title="Memo-Callback-Transition"
           onPress={() => navigation.navigate('ProductList')}
-          style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
+          style={styles.btnStyle}
         />
+        <Button
+          title="Login-Profile"
+          onPress={() => navigation.navigate('Login')}
+          style={styles.btnStyle}
+        />
+
       </View>
 
     </>
   )
 }
-
+const styles = StyleSheet.create({
+  btnStyle: {
+    alignSelf: "center", marginTop: 25,width: '100%'
+  },
+  input: {
+    borderWidth: 1,
+  },
+});
 export default HomeScreen

@@ -6,8 +6,8 @@ import { realtimeDbConfig } from '../firebase/realtimeDbConfig'
 import { firestoreDB } from '../firebase/firestoreConfig';
 import { ref, set } from "firebase/database";
 import { collection, doc, addDoc, getDocs, deleteDoc } from "firebase/firestore";
-import Product from './Product';
-const AddProduct = () => {
+import ActionItems from './ActionItems';
+const AddTask = () => {
     const [productName, setProductName] = React.useState('');
     const [products, setproducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,6 +17,7 @@ const AddProduct = () => {
             docSnap.forEach((doc) => {
                 products.push({ ...doc.data(), id: doc.id })
             });
+            console.log("actionItems", products);
             setproducts(products);
             setLoading(false);
         });
@@ -24,7 +25,7 @@ const AddProduct = () => {
     const deleteData = useCallback((id) => {
         deleteDoc(doc(firestoreDB, "products", id))
         getAlldata();
-    },[])
+    }, [])
     useEffect(() => {
         getAlldata();
     }, []);
@@ -53,18 +54,18 @@ const AddProduct = () => {
     return (
         <SafeAreaView>
             <View>
-                <TextInput label="Enter Data" style={{ margin: 16 }} onChangeText={setProductName}
+                <TextInput label="Enter action item" style={{ margin: 16 }} onChangeText={setProductName}
                     value={productName} />
             </View>
             <View style={{ alignItems: 'center' }} >
-                <Button  title="Add"
+                <Button title="Add"
                     onPress={() => addProductToFireStore()} />
             </View>
             <FlatList
                 style={{ paddingBottom: 20, marginLeft: 5 }}
                 data={products}
-                renderItem={({ item }) => (                
-                    <Product deleteData={deleteData} item={item}/>
+                renderItem={({ item }) => (
+                    <ActionItems deleteData={deleteData} item={item} />
                 )}
             />
         </SafeAreaView>
@@ -77,4 +78,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddProduct;
+export default AddTask;

@@ -12,6 +12,7 @@ const Login = ({ navigation }) => {
     }
     return (
         <View style={{ padding: 10 }}>
+
             <View >
                 <Text >
                     Username

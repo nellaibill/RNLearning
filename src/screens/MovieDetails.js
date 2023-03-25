@@ -20,10 +20,12 @@ const MovieDetails = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 5,
+    margin:15
   },
   logo: {
-    width: 150,
-    height: 200,
+    margin:10,
+    width: 250,
+    height: 300,
   },
 });
 
