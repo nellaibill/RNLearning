@@ -15,6 +15,7 @@ import MovieDetails from './src/screens/MovieDetails';
 import MovieList from './src/screens/MovieList';
 import QuotesScreen from './src/screens/QuotesScreen';
 import ActionItems from './src/ActionItems';
+import MapScreen from './src/screens/MapScreen';
 const Stack = createStackNavigator();
 function MyStack() {
   return (
@@ -29,6 +30,7 @@ function MyStack() {
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="QuotesScreen" component={QuotesScreen} />
       <Stack.Screen name="ActionItems" component={ActionItems} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Navigator>
   );
 }

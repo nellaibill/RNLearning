@@ -32,6 +32,11 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('Login')}
           style={styles.btnStyle}
         />
+           <Button
+          title="Maps"
+          onPress={() => navigation.navigate('MapScreen')}
+          style={styles.btnStyle}
+        />
 
       </View>
 
