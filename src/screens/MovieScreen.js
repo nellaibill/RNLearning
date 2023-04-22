@@ -10,15 +10,22 @@ const MovieScreen = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovies(name));
-    }, [name])
+    }, [])
     const { moviesList: { Error: error }
     } = useSelector((state) => ({ ...state.movie }));
+
+    onChange = (event) => {    
+        const {eventCount, target, text} = event.nativeEvent;
+        setName(text);
+        dispatch(getMovies(text));
+      };
+
     return (
         <ScrollView>
             <View style={styles.container}>
                 <TextInput variant="standard" label="Label"
                     style={styles.input}
-                    onChangeText={text => setName(text)}
+                    onChange={this.onChange}
                     value={name} />
                 {error && <Text>{error}</Text>}
                 <MovieList></MovieList>
