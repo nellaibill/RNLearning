@@ -12,7 +12,6 @@ import UserProfile from './src/UserProfile';
 import MovieScreen from './src/screens/MovieScreen';
 import store from './store';
 import MovieDetails from './src/screens/MovieDetails';
-import MovieList from './src/screens/MovieList';
 import QuotesScreen from './src/screens/QuotesScreen';
 import ActionItems from './src/ActionItems';
 const Stack = createStackNavigator();
@@ -25,7 +24,6 @@ function MyStack() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="MovieScreen" component={MovieScreen} />
-      <Stack.Screen name="MovieList" component={MovieList} />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="QuotesScreen" component={QuotesScreen} />
       <Stack.Screen name="ActionItems" component={ActionItems} />
