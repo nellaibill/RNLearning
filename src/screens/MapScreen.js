@@ -1,16 +1,16 @@
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-const origin = { latitude: 37.3318456, longitude: -122.0296002 };
-const destination = { latitude: 37.771707, longitude: -122.4053769 };
+const origin = { latitude: 8.665362,  longitude: 77.856942 };
+const destination = { latitude: 8.72395986455355, longitude: 77.77599785859658 };
 const { width, height } = Dimensions.get("window");
-const GOOGLE_MAPS_APIKEY = "AIzaSyDpQFNHYRSGPk5levahRJAi0RcZ7B8l-4w";
+const GOOGLE_MAPS_APIKEY = "AIzaSyAVBVQoKb4aI53nZmgi_1ya5ZdQFY3TM1g";
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.02;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const INITIAL_POSITION = {
-    latitude: 40.76711,
-    longitude: -73.979704,
+    latitude: 8.72395986455355,
+    longitude: 77.77599785859658,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
 };
@@ -33,7 +33,7 @@ const MapScreen = () => {
                 <MapViewDirections
                     origin={origin}
                     destination={destination}
-                    apikey="AIzaSyDpQFNHYRSGPk5levahRJAi0RcZ7B8l-4w"
+                    apikey='AIzaSyDpQFNHYRSGPk5levahRJAi0RcZ7B8l-4w'
                 />
             </MapView>
         </View >
