@@ -4,7 +4,9 @@ const movieSlice = createSlice({
     name: "movie",
     initialState: {
         moviesList: [],
-        movie: {}
+        movie: {},
+        errorMessage: "",
+        isError: false,
     },
     reducers: {
         getMovies(name) {
@@ -19,8 +21,12 @@ const movieSlice = createSlice({
         setMovie: (state, action) => {
             state.movie = action.payload
         },
+        setMoviesError(state, action) {
+            state.errorMessage = action.payload
+            state.isError = true;
+        }
     },
 })
 
-export const { getMovies, setMovies,getMovie,setMovie } = movieSlice.actions
+export const { getMovies, setMovies, getMovie, setMovie, setMoviesError } = movieSlice.actions
 export default movieSlice.reducer;

@@ -4,7 +4,8 @@ import MovieReducer from "./src/features/movieSlice";
 import quoteReducer from "./src/features/quoteSlice";
 import rootSaga from "./src/sagas/rootSaga";
 import userReducer from './src/features/user'
-
+const reduxLogger = require('redux-logger')
+const logger = reduxLogger.createLogger();
 
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
@@ -13,7 +14,7 @@ const store = configureStore({
         user: userReducer,
         quotes: quoteReducer,
     },
-    middleware: [sagaMiddleware]
+    middleware: [sagaMiddleware].concat(logger)
 })
 
 sagaMiddleware.run(rootSaga)
