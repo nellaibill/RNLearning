@@ -11,8 +11,9 @@ const MovieScreen = () => {
     useEffect(() => {
         dispatch(getMovies(name));
     }, [])
-    const { moviesList, errorMessage, isError: { Error: error }
+    const { errorMessage, isError, moviesList
     } = useSelector((state) => ({ ...state.movie }));
+
 
     onChange = (event) => {
         const { eventCount, target, text } = event.nativeEvent;
@@ -45,9 +46,9 @@ const MovieScreen = () => {
                     style={styles.input}
                     onChange={this.onChange}
                     value={name} />
-                {error && <Text>{error}</Text>}
-                <ListOfMovies />
-                {moviesList.length === 0 && <ActivityIndicator />}
+
+                {moviesList.Error && <Text>{moviesList.Error}</Text>}
+                {moviesList?.length === 0 ? <ActivityIndicator /> : <ListOfMovies />}
             </View>
         </ScrollView>
     )
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     container: {
-        padding: 5,
+        margin: 15,
     },
 });
 export default MovieScreen

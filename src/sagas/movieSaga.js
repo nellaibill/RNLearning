@@ -11,30 +11,29 @@ function* onLoadMoviesAsync({ payload }) {
         }
     }
     catch (error) {
-        console.log("moviesagafile",error);
-        yield put(setMoviesError( error ))
+        yield put(setMoviesError(error))
     }
 }
-    function* onLoadMovies() {
-        yield takeLatest(getMovies.type, onLoadMoviesAsync)
-    }
+function* onLoadMovies() {
+    yield takeLatest(getMovies.type, onLoadMoviesAsync)
+}
 
-    function* onLoadMovieAsync({ payload }) {
-        try {
-            const movieId = payload;
-            const response = yield call(fetchMovie, movieId);
-            if (response.status === 200) {
-                yield put(setMovie({ ...response.data }))
-            }
+function* onLoadMovieAsync({ payload }) {
+    try {
+        const movieId = payload;
+        const response = yield call(fetchMovie, movieId);
+        if (response.status === 200) {
+            yield put(setMovie({ ...response.data }))
         }
-        catch (error) {
-            console.log(error);
-        }
-
+    }
+    catch (error) {
+        console.log(error);
     }
 
-    function* onLoadMovie() {
-        yield takeLatest(getMovie.type, onLoadMovieAsync)
-    }
+}
 
-    export const moviesSaga = [fork(onLoadMovies), fork(onLoadMovie)]
+function* onLoadMovie() {
+    yield takeLatest(getMovie.type, onLoadMovieAsync)
+}
+
+export const moviesSaga = [fork(onLoadMovies), fork(onLoadMovie)]
