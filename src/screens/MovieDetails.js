@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 const MovieDetails = () => {
   const { movie
   } = useSelector((state) => ({ ...state.movie }));
+  if (movie.Year === "2002") {
+    throw new Error('Crashed!!!!');
+  }
   return (
     <View style={styles.container}>
       <Text>Title {movie.Title}</Text>
