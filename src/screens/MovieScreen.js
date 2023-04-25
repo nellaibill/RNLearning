@@ -1,44 +1,24 @@
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-
+import { View, Text, TextInput, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { getMovie, getMovies } from '../features/movieSlice';
-import { useNavigation } from '@react-navigation/native';
+import { getMovies } from '../features/movieSlice';
 import { useSelector } from 'react-redux'
+import MovieCard from '../components/MovieCard';
 const MovieScreen = () => {
     const [name, setName] = useState("spider");
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovies(name));
     }, [])
-    const { errorMessage, isError, moviesList
+    const { moviesList
     } = useSelector((state) => ({ ...state.movie }));
 
 
     onChange = (event) => {
-        const { eventCount, target, text } = event.nativeEvent;
+        const { text } = event.nativeEvent;
         setName(text);
         dispatch(getMovies(text));
     };
-    const ListOfMovies = () => {
-        return <View>
-            {moviesList?.Search?.map((item, index) => (
-                <View key={index}
-                    style={{ padding: 8, borderBottomColor: 'blue', borderBottomWidth: 0.5 }}>
-                    <TouchableOpacity onPress={() => handleNavigation(item.imdbID)}
-                    >
-                        <Text>{item.Title}</Text>
-                        <Text>{item.Year}</Text>
-                    </TouchableOpacity>
-                </View>
-            ))}
-        </View>;
-    };
-    const navigation = useNavigation();
-    const handleNavigation = (id) => {
-        dispatch(getMovie(id));
-        navigation.navigate('MovieDetails')
-    }
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -46,9 +26,18 @@ const MovieScreen = () => {
                     style={styles.input}
                     onChange={this.onChange}
                     value={name} />
-
                 {moviesList.Error && <Text>{moviesList.Error}</Text>}
-                {moviesList?.length === 0 ? <ActivityIndicator /> : <ListOfMovies />}
+                {moviesList?.length === 0 ? <ActivityIndicator /> :
+                    <View>
+                        {moviesList?.Search?.map((item, index) => {
+                            return <MovieCard
+                                title={item.Title}
+                                year={item.Year}
+                                imdbID={item.imdbID}
+                                key={index} />
+                        })}
+                    </View>
+                }
             </View>
         </ScrollView>
     )
