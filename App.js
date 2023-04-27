@@ -14,6 +14,7 @@ import store from './store';
 import MovieDetails from './src/screens/MovieDetails';
 import QuotesScreen from './src/screens/QuotesScreen';
 import ActionItems from './src/ActionItems';
+import ErrorBoundary from './src/utils/ErrorBoundary';
 const Stack = createStackNavigator();
 function MyStack() {
   return (
@@ -38,7 +39,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <MyStack />
+        <ErrorBoundary>
+          <MyStack />
+        </ErrorBoundary>
       </NavigationContainer>
     </Provider>
   )
