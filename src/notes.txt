@@ -1,0 +1,7 @@
+Generate KeyStore
+keytool -genkey -v -keystore d:\debug.keystore -alias debug -keyalg RSA -keysize 2048 -validity 10000
+
+keytool -list -v -keystore  D:\Learning\react-native\RNLearning\android\app -alias debug -storepass Hana----/ -keypass Hana----/
+
+View  SHA 1 Key
+keytool -list -v -alias debug -keystore D:\Learning\react-native\RNLearning\android\app\debug.keystore
