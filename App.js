@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { NotificationServices, requestUserPermission } from './src/utils/pushnotification';
 import { Provider } from 'react-redux';
 import Login from './Login';
-import UserProfile from './src/UserProfile';
+import UserProfile from './src/components/UserProfile';
 import MovieScreen from './src/screens/MovieScreen';
 import store from './store';
 import MovieDetails from './src/screens/MovieDetails';
