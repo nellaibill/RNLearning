@@ -1,10 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 import { Button } from "@react-native-material/core";
-
 import React, { useState } from 'react'
 import Login from '../../Login';
-
-
 const HomeScreen = ({ navigation }) => {
 
   return (

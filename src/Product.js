@@ -1,16 +1,17 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { Button } from "@react-native-material/core";
+import styles from './styles';
 const Product = ({ name, addToCart }) => {
-    console.log("product name",name);
+    console.log("product name", name);
     return (
         <ScrollView>
-            <View style={{ flexDirection: 'row', padding: 5, borderBottomColor: 'gray', borderBottomWidth: 0.5 }}>
-                <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
+            <View style={styles.list_container}>
+                <View style={styles.list_name}>
                     <Text>{name}</Text>
 
                 </View>
-                <Button title="Add" onPress={addToCart} />
+                <Button styles={styles.button} title="Add" onPress={addToCart} />
 
             </View>
         </ScrollView>

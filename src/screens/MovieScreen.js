@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getMovies } from '../features/movieSlice';
 import { useSelector } from 'react-redux'
 import MovieCard from '../components/MovieCard';
+import styles from '../styles';
 const MovieScreen = () => {
     const [name, setName] = useState("spider");
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const MovieScreen = () => {
     };
     return (
         <ScrollView>
-            <View style={styles.container}>
+            <View style={styles.pad10}>
                 <TextInput variant="standard" label="Label"
                     style={styles.input}
                     onChange={this.onChange}
@@ -42,13 +43,4 @@ const MovieScreen = () => {
         </ScrollView>
     )
 }
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        borderWidth: 1,
-    },
-    container: {
-        margin: 15,
-    },
-});
 export default MovieScreen
