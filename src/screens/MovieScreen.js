@@ -10,7 +10,7 @@ const MovieScreen = () => {
     useEffect(() => {
         dispatch(getMovies(name));
     }, [])
-    const { moviesList
+    const { moviesList, isError, errorMessage
     } = useSelector((state) => ({ ...state.movie }));
 
 
@@ -26,8 +26,8 @@ const MovieScreen = () => {
                     style={styles.input}
                     onChange={this.onChange}
                     value={name} />
-                {moviesList.Error && <Text>{moviesList.Error}</Text>}
-                {moviesList?.length === 0 ? <ActivityIndicator /> :
+                {(isError && moviesList?.length <= 0) && <Text>{errorMessage}</Text>}
+                {(moviesList?.length === 0 && !isError) ? <ActivityIndicator /> :
                     <View>
                         {moviesList?.Search?.map((item, index) => {
                             return <MovieCard
