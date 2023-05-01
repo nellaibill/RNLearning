@@ -14,6 +14,7 @@ import store from './store';
 import MovieDetails from './src/screens/MovieDetails';
 import QuotesScreen from './src/screens/QuotesScreen';
 import ActionItems from './src/ActionItems';
+import MapScreen from './src/screens/MapScreen';
 import ErrorBoundary from './src/utils/ErrorBoundary';
 const Stack = createStackNavigator();
 
@@ -42,6 +43,7 @@ function SignOutStack() {
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="QuotesScreen" component={QuotesScreen} />
       <Stack.Screen name="ActionItems" component={ActionItems} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Navigator>
   );
 }

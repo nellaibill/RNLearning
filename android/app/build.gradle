@@ -153,6 +153,8 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+
+    
     //implementation(":react-native-community_google-signin") // <--- add this dependency
 
         implementation "com.google.android.gms:play-services-auth:10.0.1" // Add this, not 9.8.0 (from instructions).

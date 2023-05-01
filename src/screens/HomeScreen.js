@@ -6,31 +6,34 @@ import styles from '../styles';
 const HomeScreen = ({ navigation }) => {
   return (
     <>
-       <View style={styles.plr20}>
-      <Button
-        title="Redux-Saga-Polling"
-        onPress={() => navigation.navigate('QuotesScreen')}
-        style={styles.btnStyle}
-      />
-      <Button
-        title="RTK-Saga -Movie DB"
-        onPress={() => navigation.navigate('MovieScreen')}
-        style={styles.btnStyle}
-      />
-      <Button
-        title="ActionItems -Firebase DB"
-        onPress={() => navigation.navigate('AddTask')}
-        style={styles.btnStyle}
-      />
-      <Button
-        title="Memo-Callback-Transition"
-        onPress={() => navigation.navigate('ProductList')}
-        style={styles.btnStyle}
-      />
-      <View style={styles.btnStyle}>
-        <Login />
+      <View style={styles.plr20}>
+        <Button
+          title="Redux-Saga-Polling"
+          onPress={() => navigation.navigate('QuotesScreen')}
+          style={styles.btnStyle}
+        />
+        <Button
+          title="RTK-Saga -Movie DB"
+          onPress={() => navigation.navigate('MovieScreen')}
+          style={styles.btnStyle}
+        />
+        <Button
+          title="ActionItems -Firebase DB"
+          onPress={() => navigation.navigate('AddTask')}
+          style={styles.btnStyle}
+        />
+        <Button
+          title="Memo-Callback-Transition"
+          onPress={() => navigation.navigate('ProductList')}
+          style={styles.btnStyle}
+        />
+        <Button
+          title="Maps"
+          onPress={() => navigation.navigate('MapScreen')}
+          style={styles.btnStyle}
+        />
       </View>
-    </View >
+
     </>
   )
 }
