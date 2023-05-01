@@ -15,9 +15,13 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     button: {
-        backgroundColor: '#007AFF',
-        borderRadius: 5,
-        padding: 10,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        width: 100,
+        height: 50,
+        backgroundColor: 'blue',
+        borderRadius: 10,
+        justifyContent: 'center',
         alignItems: 'center',
     },
     buttonText: {
@@ -46,7 +50,13 @@ const styles = StyleSheet.create({
         marginTop: 20,
         padding: 5
     },
-
+    container: {
+        flex: 1,
+        padding: 10
+    },
+    profileData: {
+        paddingTop: 60
+    },
 });
 
 export default styles;

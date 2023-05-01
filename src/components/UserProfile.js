@@ -2,6 +2,8 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import ProfileImage from './ProfileImage'
+import styles from '../styles';
+import UserLogout from './UserLogout';
 const UserProfile = () => {
   const userData = useSelector(state => state.user.userData)
   return (
@@ -10,19 +12,12 @@ const UserProfile = () => {
       <View style={styles.profileData}>
         <Text> Welcome {userData.displayName}</Text>
         <Text> Email {userData.email}</Text>
+
+        <UserLogout />
       </View>
     </View>
   )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10
-  },
-  profileData: {
-    paddingTop: 60
-  }
-});
 
 
 export default UserProfile
