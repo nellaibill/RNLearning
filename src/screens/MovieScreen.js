@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import { getMovies } from '../features/movieSlice';
 import { useSelector } from 'react-redux'
 import MovieCard from '../components/MovieCard';
+import styles from '../styles';
 const MovieScreen = () => {
     const [name, setName] = useState("spider");
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovies(name));
     }, [])
-    const { moviesList
+    const { moviesList, isError, errorMessage
     } = useSelector((state) => ({ ...state.movie }));
 
 
@@ -21,13 +22,13 @@ const MovieScreen = () => {
     };
     return (
         <ScrollView>
-            <View style={styles.container}>
+            <View style={styles.pad10}>
                 <TextInput variant="standard" label="Label"
                     style={styles.input}
                     onChange={this.onChange}
                     value={name} />
-                {moviesList.Error && <Text>{moviesList.Error}</Text>}
-                {moviesList?.length === 0 ? <ActivityIndicator /> :
+                {(isError && moviesList?.length <= 0) && <Text>{errorMessage}</Text>}
+                {(moviesList?.length === 0 && !isError) ? <ActivityIndicator /> :
                     <View>
                         {moviesList?.Search?.map((item, index) => {
                             return <MovieCard
@@ -42,13 +43,4 @@ const MovieScreen = () => {
         </ScrollView>
     )
 }
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        borderWidth: 1,
-    },
-    container: {
-        margin: 15,
-    },
-});
 export default MovieScreen

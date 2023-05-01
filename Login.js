@@ -1,14 +1,14 @@
-import { View, Text, Button, SafeAreaView, ScrollView  } from 'react-native'
-import React, { useState,useEffect } from 'react';
+import { View, Text, Button, SafeAreaView, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { login } from './src/features/user'
+import { setUserLoggedInData } from './src/features/movieSlice'
 import {
     GoogleSignin,
     GoogleSigninButton,
     statusCodes,
-  } from 'react-native-google-signin';
-  import auth from '@react-native-firebase/auth';
-  import { useNavigation } from '@react-navigation/native';
+} from 'react-native-google-signin';
+import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 const Login = () => {
     const [loggedIn, setloggedIn] = useState(false);
     const [user, setUser] = useState([]);
@@ -60,22 +60,9 @@ const Login = () => {
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    signOut = async () => {
-        try {
-            await GoogleSignin.revokeAccess();
-            await GoogleSignin.signOut();
-            auth()
-                .signOut()
-                .then(() => alert('Your are signed out!'));
-            setloggedIn(false);
-            // setuserInfo([]);
-        } catch (error) {
-            console.error(error);
-        }
-    };
     const dispatch = useDispatch();
     const handleLogin = (user) => {
-        dispatch(login(user));
+        dispatch(setUserLoggedInData(user));
         navigation.navigate('UserProfile')
     }
     return (
@@ -83,25 +70,15 @@ const Login = () => {
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic">
 
-                        <GoogleSigninButton
-                            style={{ width: '100%', height: 48 }}
-                            size={GoogleSigninButton.Size.Wide}
-                            color={GoogleSigninButton.Color.Dark}
-                            onPress={this._signIn}
-                        />
-          
-                    <View >
-                        {!user && <Text>You are currently logged out</Text>}
-                        {user && (
-                            <View>
-                                <Text>Welcome {user.displayName}</Text>
-                                <Button
-                                    onPress={this.signOut}
-                                    title="LogOut"
-                                    color="red"></Button>
-                            </View>
-                        )}
-                    </View>
+                <GoogleSigninButton
+                    style={{ width: '100%', height: 48 }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={this._signIn}
+                />
+
+                <View >
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
