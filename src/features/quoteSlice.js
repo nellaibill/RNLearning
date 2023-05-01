@@ -4,7 +4,7 @@ const quoteSlice = createSlice({
     name: "quote",
     initialState: {
         quotes: [],
-        loading: false,
+        loading: true,
         polling: false,
     },
     reducers: {

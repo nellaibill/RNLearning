@@ -1,12 +1,12 @@
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { Button } from "@react-native-material/core";
-
 import React from 'react'
-
+import Login from '../../Login';
+import styles from '../styles';
 const HomeScreen = ({ navigation }) => {
   return (
     <>
-      <View style={{ marginLeft: 20, marginRight: 20 }}>
+      <View style={styles.plr20}>
         <Button
           title="Redux-Saga-Polling"
           onPress={() => navigation.navigate('QuotesScreen')}
@@ -28,27 +28,13 @@ const HomeScreen = ({ navigation }) => {
           style={styles.btnStyle}
         />
         <Button
-          title="Login-Profile"
-          onPress={() => navigation.navigate('Login')}
-          style={styles.btnStyle}
-        />
-           <Button
           title="Maps"
           onPress={() => navigation.navigate('MapScreen')}
           style={styles.btnStyle}
         />
-
       </View>
 
     </>
   )
 }
-const styles = StyleSheet.create({
-  btnStyle: {
-    alignSelf: "center", marginTop: 25,width: '100%'
-  },
-  input: {
-    borderWidth: 1,
-  },
-});
 export default HomeScreen

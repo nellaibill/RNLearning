@@ -1,38 +1,46 @@
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TextInput, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getMovies } from '../features/movieSlice';
-import MovieList from './MovieList';
-
 import { useSelector } from 'react-redux'
+import MovieCard from '../components/MovieCard';
+import styles from '../styles';
 const MovieScreen = () => {
     const [name, setName] = useState("spider");
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovies(name));
-    }, [name])
-    const { moviesList: { Error: error }
+    }, [])
+    const { moviesList, isError, errorMessage
     } = useSelector((state) => ({ ...state.movie }));
+
+
+    onChange = (event) => {
+        const { text } = event.nativeEvent;
+        setName(text);
+        dispatch(getMovies(text));
+    };
     return (
         <ScrollView>
-            <View style={styles.container}>
+            <View style={styles.pad10}>
                 <TextInput variant="standard" label="Label"
                     style={styles.input}
-                    onChangeText={text => setName(text)}
+                    onChange={this.onChange}
                     value={name} />
-                {error && <Text>{error}</Text>}
-                <MovieList></MovieList>
+                {(isError && moviesList?.length <= 0) && <Text>{errorMessage}</Text>}
+                {(moviesList?.length === 0 && !isError) ? <ActivityIndicator /> :
+                    <View>
+                        {moviesList?.Search?.map((item, index) => {
+                            return <MovieCard
+                                title={item.Title}
+                                year={item.Year}
+                                imdbID={item.imdbID}
+                                key={index} />
+                        })}
+                    </View>
+                }
             </View>
         </ScrollView>
     )
 }
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        borderWidth: 1,
-    },
-    container: {
-        padding: 5,
-    },
-});
 export default MovieScreen

@@ -1,40 +1,45 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import MapViewDirections from "react-native-maps-directions";
-const origin = { latitude: 8.665362,  longitude: 77.856942 };
-const destination = { latitude: 8.72395986455355, longitude: 77.77599785859658 };
-const { width, height } = Dimensions.get("window");
+import { View, StyleSheet, Dimensions } from 'react-native'
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import Geolocation from '@react-native-community/geolocation';
+import React, { useState, useEffect } from 'react';
 const GOOGLE_MAPS_APIKEY = "AIzaSyAVBVQoKb4aI53nZmgi_1ya5ZdQFY3TM1g";
-const ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.02;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const INITIAL_POSITION = {
-    latitude: 8.72395986455355,
-    longitude: 77.77599785859658,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
-};
-
-
 const MapScreen = () => {
+    const [position, setPosition] = useState({
+        latitude: 10,
+        longitude: 10,
+        latitudeDelta: 0.001,
+        longitudeDelta: 0.001,
+    });
+
+    useEffect(() => {
+        Geolocation.getCurrentPosition((pos) => {
+            const crd = pos.coords;
+            setPosition({
+                latitude: crd.latitude,
+                longitude: crd.longitude,
+                latitudeDelta: 0.0421,
+                longitudeDelta: 0.0421,
+            });
+        })
+    }, []);
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
                 provider={PROVIDER_GOOGLE}
-                initialRegion={INITIAL_POSITION}
+                initialRegion={position}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
+                followsUserLocation={true}
+                showsCompass={true}
+                scrollEnabled={true}
+                zoomEnabled={true}
+                pitchEnabled={true}
+                rotateEnabled={true}
                 key={GOOGLE_MAPS_APIKEY}>
-                <Marker coordinate={{
-                    latitude: 40.76711,
-                    longitude: -73.979704,
-                }}
-                    title="Test Title"
-                    description="Test Description"
-                />
-                <MapViewDirections
-                    origin={origin}
-                    destination={destination}
-                    apikey='AIzaSyDpQFNHYRSGPk5levahRJAi0RcZ7B8l-4w'
-                />
+                <Marker
+                    title='Yor are here'
+                    description='This is a description'
+                    coordinate={position} />
             </MapView>
         </View >
     )
