@@ -5,7 +5,7 @@ import ProfileImage from './ProfileImage'
 import styles from '../styles';
 import UserLogout from './UserLogout';
 const UserProfile = () => {
-  const userData = useSelector(state => state.user.userData)
+  const userData = useSelector(state => state.movie.userData)
   return (
     <View style={styles.container}>
       <ProfileImage image={userData.photoURL} />

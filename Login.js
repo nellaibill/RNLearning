@@ -1,7 +1,7 @@
 import { View, Text, Button, SafeAreaView, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { setUserLoggedInData } from './src/features/user'
+import { setUserLoggedInData } from './src/features/movieSlice'
 import {
     GoogleSignin,
     GoogleSigninButton,

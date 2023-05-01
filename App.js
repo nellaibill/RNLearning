@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 function AuthStack() {
 
-  const { isLoggedIn } = useSelector(state => state.user);
+  const { isLoggedIn } = useSelector(state => state.movie);
   return isLoggedIn ? <SignInStack /> : <SignOutStack />
 }
 function SignInStack() {

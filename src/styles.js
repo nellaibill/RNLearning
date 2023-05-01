@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     pad10: {
         padding: 10
     },
+    plr20: {
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
     list_container: { flexDirection: 'row', padding: 5, borderBottomColor: 'gray', borderBottomWidth: 0.5 },
     list_name: { flex: 1, alignItems: 'flex-start', justifyContent: 'center' },
     quoteContent: {
@@ -56,6 +60,9 @@ const styles = StyleSheet.create({
     },
     profileData: {
         paddingTop: 60
+    },
+    btnStyle: {
+        alignSelf: "center", marginTop: 25, width: '100%'
     },
 });
 
