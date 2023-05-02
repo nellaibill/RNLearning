@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
+    pt10: {
+        paddingTop: 10
+    },
     list_container: { flexDirection: 'row', padding: 5, borderBottomColor: 'gray', borderBottomWidth: 0.5 },
     list_name: { flex: 1, alignItems: 'flex-start', justifyContent: 'center' },
     quoteContent: {
