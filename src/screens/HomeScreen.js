@@ -27,11 +27,9 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate('ProductList')}
           style={styles.btnStyle}
         />
-        <Button
-          title="Maps"
-          onPress={() => navigation.navigate('MapScreen')}
-          style={styles.btnStyle}
-        />
+        
+        <Login />
+
       </View>
 
     </>

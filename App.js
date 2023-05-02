@@ -26,9 +26,10 @@ function AuthStack() {
 function SignInStack() {
   return (
     <Stack.Navigator initialRouteName='UserProfile'>
-            <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Navigator>
   );
 }
@@ -43,7 +44,6 @@ function SignOutStack() {
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="QuotesScreen" component={QuotesScreen} />
       <Stack.Screen name="ActionItems" component={ActionItems} />
-      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Navigator>
   );
 }
