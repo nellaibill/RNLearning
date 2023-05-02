@@ -1,46 +1,87 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
-import React, { useState } from 'react';
+import { View, Text, Button, SafeAreaView, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { login } from './src/features/user'
-const Login = ({ navigation }) => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+import { setUserLoggedInData } from './src/features/movieSlice'
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from 'react-native-google-signin';
+import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
+const Login = () => {
+    const [loggedIn, setloggedIn] = useState(false);
+    const [user, setUser] = useState([]);
+    const navigation = useNavigation();
+    _signIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const { accessToken, idToken } = await GoogleSignin.signIn();
+            setloggedIn(true);
+
+            const credential = auth.GoogleAuthProvider.credential(
+                idToken,
+                accessToken,
+            );
+            await auth().signInWithCredential(credential);
+        } catch (error) {
+            console.log("error", error);
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+                alert('Cancel');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                alert('Signin in progress');
+                // operation (f.e. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                alert('PLAY_SERVICES_NOT_AVAILABLE');
+                // play services not available or outdated
+            } else {
+                // some other error happened
+            }
+        }
+    };
+    function onAuthStateChanged(user) {
+        setUser(user);
+        console.log(user);
+
+        if (user) {
+            setloggedIn(true);
+            handleLogin(user);
+        }
+    }
+    useEffect(() => {
+        GoogleSignin.configure({
+            scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
+            webClientId:
+                '51050635347-471mlfgj7l0vnqr5v4h1ldgr6elr1uqp.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+            offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+        });
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
+    }, []);
+
     const dispatch = useDispatch();
-    const handleLogin = () => {
-        dispatch(login({ username: username }));
+    const handleLogin = (user) => {
+        dispatch(setUserLoggedInData(user));
         navigation.navigate('UserProfile')
     }
     return (
-        <View style={{ padding: 10 }}>
+        <SafeAreaView>
+            <ScrollView
+                contentInsetAdjustmentBehavior="automatic">
 
-            <View >
-                <Text >
-                    Username
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setUsername}
-                    value={username}
+                <GoogleSigninButton
+                    style={{ width: '100%', height: 48 }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={this._signIn}
                 />
-                <Text >
-                    Password
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setPassword}
-                    value={password}
-                />
-                <Button title="Login"
-                    onPress={() => handleLogin()}> </Button>
-            </View >
-        </View>
+
+                <View >
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        borderWidth: 1,
-        marginBottom: 10
-    },
-});
+
 export default Login

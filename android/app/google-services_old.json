@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "9940506458",
+    "project_id": "rnlearningfirestore",
+    "storage_bucket": "rnlearningfirestore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9940506458:android:400ab4667b777038398563",
+        "android_client_info": {
+          "package_name": "com.rnlearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9940506458-i8rochj8ijoeb2ic6r2ubcjk06r684in.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu2kd1WjEWNiNWy6m_kBahC9ZeML2YmG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9940506458-i8rochj8ijoeb2ic6r2ubcjk06r684in.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

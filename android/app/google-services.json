@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "9940506458",
-    "project_id": "rnlearningfirestore",
-    "storage_bucket": "rnlearningfirestore.appspot.com"
+    "project_number": "51050635347",
+    "project_id": "instamobile--signin-8f73e",
+    "storage_bucket": "instamobile--signin-8f73e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:9940506458:android:400ab4667b777038398563",
+        "mobilesdk_app_id": "1:51050635347:android:4aff63fd476f78ee6326a6",
         "android_client_info": {
           "package_name": "com.rnlearning"
         }
       },
       "oauth_client": [
         {
-          "client_id": "9940506458-i8rochj8ijoeb2ic6r2ubcjk06r684in.apps.googleusercontent.com",
+          "client_id": "51050635347-8h5vss44qtpm4o72gfvlbdokifcrpmut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rnlearning",
+            "certificate_hash": "bbd4c2a2f122ed0834650676bb7536666a2af24b"
+          }
+        },
+        {
+          "client_id": "51050635347-7ih074t1kbfkvleav0ijn7u9h8ttegd8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCu2kd1WjEWNiNWy6m_kBahC9ZeML2YmG0"
+          "current_key": "AIzaSyA8DWhGMJ7HViqGS4BGNnWWGyyJHE4TPJ8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "9940506458-i8rochj8ijoeb2ic6r2ubcjk06r684in.apps.googleusercontent.com",
+              "client_id": "51050635347-7ih074t1kbfkvleav0ijn7u9h8ttegd8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

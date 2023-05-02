@@ -1,38 +1,23 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text } from 'react-native'
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "@react-native-material/core";
-import { quoteSuccess, startPolling, stopPolling } from '../features/quoteSlice';
+import { startPolling, stopPolling } from '../features/quoteSlice';
+import styles from '../styles';
+import { ActivityIndicator } from '@react-native-material/core';
 const QuotesScreen = () => {
   const dispatch = useDispatch();
   const quotes = useSelector((state) => state.quotes);
-  const loading = useSelector((state) => state.loading);
+  useEffect(() => {
+    dispatch(startPolling());
+    return () => {
+      dispatch(stopPolling());
+    };
+  }, []);
   return (
-    <View style={{ margin: 20 }}>
-
-      <Button
-        title="Start Polling"
-        onPress={() => dispatch(startPolling())}
-        style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
-      />
-
-      {loading && <Text>Loading...</Text>}
+    <View style={styles.pad10}>
+      {quotes?.loading && (<ActivityIndicator/>)}
       <Text style={styles.quoteContent}>{quotes?.quotes?.content}</Text>
-
-      <Button
-        title="Stop Polling"
-        onPress={() => dispatch(stopPolling())}
-        style={{ alignSelf: "center", marginTop: 20, width: '100%' }}
-      />
     </View>
   )
 }
-const styles = StyleSheet.create({
-  quoteContent: {
-    height: 150,
-    borderWidth: 1,
-    marginTop: 20,
-    padding:5
-  },
-});
 export default QuotesScreen
