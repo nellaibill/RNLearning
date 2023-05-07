@@ -19,13 +19,13 @@ const UserLogout = () => {
   };
   signOut = async () => {
     try {
-      await GoogleSignin.revokeAccess();
+      //await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
       auth()
         .signOut()
         .then(() => userLogout());
     } catch (error) {
-      console.error(error);
+      console.error("fignin_error",error);
     }
   };
   return (
